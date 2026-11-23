@@ -5,8 +5,16 @@ plan/
 /corpus
 /log
 .DS_Store
-/fuzz-out
+/.claude/
+/target-*/
+/craft-fonts/
+.fuzz-out
 /assets/models
-# A craft-fonts checkout used as the optional CRAFT_FONTS_DIR build input (CI and releases put it here).
-/craft-fonts
-.claude/
+/*.dmg
+/*.msi
+*.exe
+*.zip
+.vscode/
+.idea/
+*.swp
+*.swo
