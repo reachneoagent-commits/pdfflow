@@ -1,14 +1,14 @@
 [Desktop Entry]
 Type=Application
-Name=PdfCraft
+Name=PDFflow
 GenericName=PDF Editor
 Comment=Read, organize, combine, split and secure PDFs
-Exec=pdfcraft %U
-TryExec=pdfcraft
-Icon=ai.storyteller.pdfcraft
+Exec=pdfflow %U
+TryExec=pdfflow
+Icon=ai.storyteller.pdfflow
 Terminal=false
 StartupNotify=true
-StartupWMClass=ai.storyteller.pdfcraft
+StartupWMClass=ai.storyteller.pdfflow
 Categories=Office;Viewer;
 Keywords=pdf;viewer;editor;annotate;sign;forms;merge;split;
 MimeType=application/pdf;

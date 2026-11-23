@@ -1,16 +1,16 @@
-# Flatpak manifest for PdfCraft, ready for a Flathub submission.
+# Flatpak manifest for PDFflow, ready for a Flathub submission.
 #
 # Flatpak builds run offline, so the crate sources must be vendored first. From the repo root:
 #
 #   curl -fsSLO https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/cargo/flatpak-cargo-generator.py
 #   python3 flatpak-cargo-generator.py Cargo.lock -o packaging/linux/flatpak/cargo-sources.json
 #   flatpak-builder --user --install --force-clean build-flatpak packaging/linux/flatpak/ai.storyteller.pdfcraft.yml
-#   flatpak run ai.storyteller.pdfcraft
+#   flatpak run ai.storyteller.pdfflow
 #
 # For Flathub, replace the `dir` source with a `git` source pinned to a release tag and commit.
-# The single-file .flatpak attached to each release comes from ai.storyteller.pdfcraft.bundle.yml,
+# The single-file .flatpak attached to each release comes from ai.storyteller.pdfflow.bundle.yml,
 # which repackages the prebuilt release binaries. Keep runtime-version and finish-args identical.
-id: ai.storyteller.pdfcraft
+id: ai.storyteller.pdfflow
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
