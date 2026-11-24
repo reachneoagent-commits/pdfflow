@@ -39,7 +39,6 @@ jobs:
         run: |
           mkdir -p dist
           hdiutil create -srcfolder PDFflow.app -ov -format UDZO "dist/pdfflow-${VERSION}-macos-arm64.dmg"
-          hdiutil internet-enable -yes "dist/pdfflow-${VERSION}-macos-arm64.dmg"
 
       - name: Upload macOS asset
         uses: softprops/action-gh-release@v2
