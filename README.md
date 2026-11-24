@@ -68,6 +68,7 @@ The ArtCraft name, wordmark and logos remain trademarks of the ArtCraft Team and
 Full third-party credits are in [`NOTICE`](NOTICE) and [`ATTRIBUTION.md`](ATTRIBUTION.md).
 
 - **[PdfCraft](https://github.com/storytold/pdfcraft)** by the ArtCraft team: the original PDF engine, UI and file formats (MIT OR Apache-2.0).
+- **[craft-libs](https://github.com/storytold/craft-libs)** by the ArtCraft team: the shared UI framework and file-format libraries this app is built on, plus [egui](https://github.com/emilk/egui) (MIT OR Apache-2.0).
 - **FlowApps branding, logo and symbol:** Reach Neo (trademark of Reach Neo).
 
 PDFflow is not affiliated with or endorsed by ArtCraft or the PdfCraft contributors.
