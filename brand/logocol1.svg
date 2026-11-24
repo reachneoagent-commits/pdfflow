@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.21 31.12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d83535;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="logocol1">
+      <g>
+        <polygon class="cls-1" points="4.46 4.43 7.06 4.43 9.15 4.43 22.19 4.43 24.4 4.43 26.87 4.43 26.87 17.91 24.25 17.91 24.25 17.93 17.92 17.93 17.92 22.01 31.21 22.01 31.21 0 0 0 0 31.12 4.46 31.12 4.46 4.43"/>
+        <polygon class="cls-1" points="13.23 22.01 13.23 13.23 15.78 13.23 17.92 13.23 22.19 13.23 22.19 9.13 9.15 9.13 9.15 31.12 13.23 31.12 13.23 22.01"/>
+      </g>
+    </g>
+  </g>
+</svg>
