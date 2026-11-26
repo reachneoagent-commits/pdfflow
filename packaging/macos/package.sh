@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Build, sign and (optionally) notarize the macOS release artifacts:
 #
-#   $DIST/pdfflow-<version>-macos-<arch>.dmg          PDFflow.app on a drag-to-Applications DMG
-#   $DIST/pdfflow-cli-<version>-macos-<arch>.zip      the headless CLI
+#   $DIST/pdfcraft-<version>-macos-<arch>.dmg          PDFflow.app on a drag-to-Applications DMG
+#   $DIST/pdfcraft-cli-<version>-macos-<arch>.zip      the headless CLI
 #
 # Usage: packaging/macos/package.sh [--arch universal|aarch64|x86_64] [--skip-build]
 #
@@ -40,8 +40,8 @@ IDENTITY="${MACOS_SIGN_IDENTITY:--}"
 SHORT_VERSION="${VERSION%%-*}"
 WORK="$CARGO_TARGET_DIR/macos-package"
 APP="$WORK/PDFflow.app"
-DMG="$DIST/pdfflow-$VERSION-macos-$ARCH.dmg"
-CLI_ZIP="$DIST/pdfflow-cli-$VERSION-macos-$ARCH.zip"
+DMG="$DIST/pdfcraft-$VERSION-macos-$ARCH.dmg"
+CLI_ZIP="$DIST/pdfcraft-cli-$VERSION-macos-$ARCH.zip"
 
 NOTARIZE=0
 if [[ "$IDENTITY" = "-" ]]; then
@@ -117,10 +117,10 @@ echo "==> assembling $APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 # Executable and icon carry the display name (CFBundleExecutable / CFBundleIconFile).
 cp "$WORK/bin/pdfcraft" "$APP/Contents/MacOS/PDFflow"
-cp "$ROOT/assets/app-icon/pdfflow.icns" "$APP/Contents/Resources/PDFflow.icns"
+cp "$ROOT/assets/app-icon/pdfcraft.icns" "$APP/Contents/Resources/PDFflow.icns"
 # Required embedded-font notices are independent of optional font inputs.
 cp "$ROOT/NOTICE" "$APP/Contents/Resources/NOTICE"
-# The standard About panel (PdfCraft menu > About PDFflow) shows Credits.rtf under the version:
+# The standard About panel (PDFflow menu > About PDFflow) shows Credits.rtf under the version:
 # the website and Discord links the in-app About dialog has (#1287).
 cp "$HERE/Credits.rtf" "$APP/Contents/Resources/Credits.rtf"
 copy_docs "$APP/Contents/Resources"
@@ -128,7 +128,7 @@ copy_docs "$APP/Contents/Resources"
 # bundle's seal covers them.
 stage_models "$APP/Contents/Resources/models"
 sed -e "s/@VERSION@/$VERSION/g" -e "s/@SHORT_VERSION@/$SHORT_VERSION/g" \
-  -e "s/@BUILD_SHA@/${PDFFLOW_BUILD_SHA:-unknown}/g" \
+  -e "s/@BUILD_SHA@/${PDFCRAFT_BUILD_SHA:-unknown}/g" \
   "$HERE/Info.plist.in" >"$APP/Contents/Info.plist"
 plutil -lint "$APP/Contents/Info.plist"
 printf 'APPL????' >"$APP/Contents/PkgInfo"
@@ -200,7 +200,7 @@ fi
 
 # ---- CLI ---------------------------------------------------------------------------------------
 echo "==> building $CLI_ZIP"
-CLI_DIR="$WORK/pdfflow-cli-$VERSION-macos-$ARCH"
+CLI_DIR="$WORK/pdfcraft-cli-$VERSION-macos-$ARCH"
 mkdir -p "$CLI_DIR"
 cp "$WORK/bin/pdfcraft-cli" "$CLI_DIR/"
 copy_docs "$CLI_DIR"

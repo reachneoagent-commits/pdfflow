@@ -1,0 +1,152 @@
+{
+  "name": "PDFflow",
+  "bundle": "com.pdfflow.app",
+  "repo": "reachneoagent-commits/pdfflow",
+  "upstream_name": "PdfCraft",
+  "_comment": "Every change to an upstream-owned file. Applied in order by rebrand/apply.py; see docs/UPSTREAM.md.",
+  "edits": [
+    {
+      "file": "apps/pdfcraft/src/main.rs",
+      "find": "\"ai.storyteller.pdfcraft\"",
+      "replace": "\"com.pdfflow.app\""
+    },
+    {
+      "file": "apps/pdfcraft/src/main.rs",
+      "find": "let legacy = eframe::storage_dir(\"PdfCraft\")",
+      "replace": "let legacy = eframe::storage_dir(\"PDFflow\")"
+    },
+    {
+      "file": "apps/pdfcraft/src/main.rs",
+      "find": ".or_else(|| eframe::storage_dir(\"PdfCraft\"))",
+      "replace": ".or_else(|| eframe::storage_dir(\"PDFflow\"))"
+    },
+    {
+      "file": "apps/pdfcraft/src/main.rs",
+      "find": "\"PdfCraft\",",
+      "replace": "\"PDFflow\","
+    },
+    {
+      "file": "apps/pdfcraft/src/main.rs",
+      "find": ".with_title(\"PdfCraft\")",
+      "replace": ".with_title(\"PDFflow\")"
+    },
+    {
+      "file": "apps/pdfcraft/src/main.rs",
+      "find": "\"pdfcraft {}\"",
+      "replace": "\"pdfflow {}\""
+    },
+    {
+      "file": "apps/pdfcraft/src/main.rs",
+      "find": "log::info!(\"PdfCraft {}, log file",
+      "replace": "log::info!(\"PDFflow {}, log file"
+    },
+    {
+      "file": "packaging/macos/Info.plist.in",
+      "find": "Copyright © the PdfCraft authors.",
+      "replace": "Copyright © Reach Neo."
+    },
+    {
+      "file": "packaging/macos/Info.plist.in",
+      "find": "<string>ai.storyteller.pdfcraft</string>",
+      "replace": "<string>com.pdfflow.app</string>"
+    },
+    {
+      "file": "packaging/macos/Info.plist.in",
+      "find": "PdfCraft",
+      "replace": "PDFflow"
+    },
+    {
+      "file": "packaging/macos/package.sh",
+      "find": "PdfCraft",
+      "replace": "PDFflow"
+    },
+    {
+      "file": "packaging/windows/pdfcraft.wxs",
+      "find": "Learning Machines LLC",
+      "replace": "Reach Neo"
+    },
+    {
+      "file": "packaging/windows/pdfcraft.wxs",
+      "find": "https://getartcraft.com/apps/pdfcraft",
+      "replace": "https://github.com/reachneoagent-commits/pdfflow"
+    },
+    {
+      "file": "packaging/windows/pdfcraft.wxs",
+      "find": "https://discord.gg/artcraft",
+      "replace": "https://github.com/reachneoagent-commits/pdfflow"
+    },
+    {
+      "file": "packaging/windows/pdfcraft.wxs",
+      "find": "<Directory Id=\"CraftSuiteFolder\" Name=\"ArtCraft\">",
+      "replace": "<Directory Id=\"CraftSuiteFolder\" Name=\"FlowApps\">"
+    },
+    {
+      "file": "packaging/windows/pdfcraft.wxs",
+      "find": "PdfCraft",
+      "replace": "PDFflow"
+    }
+  ],
+  "prepend": [
+    {
+      "file": "CLAUDE.md",
+      "marker": "<!-- PDFflow (rebrand/apply.py) -->",
+      "lines": [
+        "<!-- PDFflow (rebrand/apply.py) -->",
+        "# PDFflow",
+        "",
+        "This repository is **PDFflow**, a fork of PdfCraft. Read `docs/UPSTREAM.md` first. In short:",
+        "",
+        "- Never hand-edit a file that came from upstream to change branding, ids, links or icons: add the",
+        "  change to `rebrand/brand.json` (or a patch in `rebrand/patches/`) and run `python3 rebrand/apply.py`,",
+        "  so it survives the next upstream merge.",
+        "- PDFflow's own files are `rebrand/`, `brand/`, `docs/UPSTREAM.md`, `README.md`,",
+        "  `assets/header-*.png` and `.github/workflows/release.yml` / `windows-release.yml`.",
+        "- Crate, binary and environment-variable names stay `pdfcraft*` / `PDFCRAFT_*`.",
+        ""
+      ]
+    }
+  ],
+  "append": [
+    {
+      "file": "NOTICE",
+      "marker": "PDFflow is a modified version",
+      "lines": [
+        "",
+        "PDFflow",
+        "",
+        "PDFflow is a modified version of PdfCraft, made by Reach Neo as part of the FlowApps suite.",
+        "It changes the name, icon, identifiers and links; rebrand/brand.json lists every change.",
+        "PDFflow is not affiliated with or endorsed by the ArtCraft Team. The PDFflow name and mark",
+        "(brand/, assets/app-icon/) are not covered by the license above."
+      ]
+    },
+    {
+      "file": ".gitattributes",
+      "marker": "(rebrand/apply.py): files we replace whole",
+      "lines": [
+        "",
+        "# PDFflow (rebrand/apply.py): files we replace whole keep our version in a merge.",
+        "# Needs `git config merge.ours.driver true` once per clone (docs/UPSTREAM.md).",
+        "README.md merge=ours",
+        ".github/workflows/release.yml merge=ours",
+        ".github/workflows/windows-release.yml merge=ours",
+        "assets/app-icon/** merge=ours"
+      ]
+    },
+    {
+      "file": ".gitignore",
+      "marker": "# FlowApps release builds",
+      "lines": [
+        "# FlowApps release builds and editor files",
+        "/*.dmg",
+        "/*.msi",
+        "*.exe",
+        "*.zip",
+        ".vscode/",
+        ".idea/",
+        "*.swp",
+        "*.swo"
+      ]
+    }
+  ]
+}
