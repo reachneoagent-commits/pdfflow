@@ -5,11 +5,12 @@ plan/
 /corpus
 /log
 .DS_Store
-/.claude/
-/target-*/
-/craft-fonts/
-.fuzz-out
+/fuzz-out
 /assets/models
+# A craft-fonts checkout used as the optional CRAFT_FONTS_DIR build input (CI and releases put it here).
+/craft-fonts
+.claude/
+# FlowApps release builds and editor files
 /*.dmg
 /*.msi
 *.exe
