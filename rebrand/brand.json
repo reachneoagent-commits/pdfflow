@@ -41,6 +41,18 @@
       "replace": "log::info!(\"PDFflow {}, log file"
     },
     {
+      "file": "crates/ui-egui/src/platform/macos_association.rs",
+      "find": "const BUNDLE_ID: &str = \"ai.storyteller.pdfcraft\";",
+      "replace": "const BUNDLE_ID: &str = \"com.pdfflow.app\";",
+      "why": "must match CFBundleIdentifier in Info.plist.in, or opening a quarantined PDF never recovers its PDFflow binding"
+    },
+    {
+      "file": "crates/ui-egui/src/platform/macos_association.rs",
+      "find": "62706c6973743030d30102030405065776657273696f6e54706174685f101062756e646c656964656e74696669657210005f101a2f4170706c69636174696f6e732f50646643726166742e6170705f101761692e73746f727974656c6c65722e7064666372616674080f171c2f314e0000000000000101000000000000000700000000000000000000000000000068",
+      "replace": "62706c6973743030d30102030405065776657273696f6e54706174685f101062756e646c656964656e74696669657210005f101a2f4170706c69636174696f6e732f50646643726166742e6170705f100f636f6d2e706466666c6f772e617070080f171c2f314e0000000000000101000000000000000700000000000000000000000000000060",
+      "why": "the test's captured binding, re-encoded with PDFflow's bundle id (same path and version)"
+    },
+    {
       "file": "packaging/macos/Info.plist.in",
       "find": "Copyright © the PdfCraft authors.",
       "replace": "Copyright © Reach Neo."

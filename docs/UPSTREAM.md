@@ -94,8 +94,9 @@ Tried on 2026-11-26 against upstream `main` (e862b7756, 1042 commits ahead): `br
 - The `legacy` / `or_else` `storage_dir("PdfCraft")` lines are gone; `main.rs` now has
   `eframe::storage_dir("PdfCraft")` in the `data_dir` line.
 - New places with the name: `single_instance.rs` (`join("PdfCraft")`), `startup.rs`
-  (`AppInfo { id: "pdfcraft", name: "PdfCraft", … }`), `crates/ocr/src/lib.rs` (model folder) and
-  `crates/ui-egui/src/platform/macos_association.rs` (bundle id).
+  (`AppInfo { id: "pdfcraft", name: "PdfCraft", … }`) and `crates/ocr/src/lib.rs` (model folder).
+- `crates/ui-egui/src/platform/macos_association.rs` already has `brand.json` edits for its bundle
+  id and its test's captured binding; check they still find their text.
 
 ## Releasing
 
