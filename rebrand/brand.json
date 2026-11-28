@@ -78,6 +78,21 @@
       "replace": "Reach Neo"
     },
     {
+      "file": "packaging/windows/test-msi.ps1",
+      "find": "'Learning Machines LLC' 'MSI manufacturer'",
+      "replace": "'Reach Neo' 'MSI manufacturer'"
+    },
+    {
+      "file": "packaging/linux/nfpm.yaml",
+      "find": "vendor: Learning Machines LLC",
+      "replace": "vendor: Reach Neo"
+    },
+    {
+      "file": "packaging/linux/ai.storyteller.pdfcraft.metainfo.xml.in",
+      "find": "<name>Learning Machines LLC</name>",
+      "replace": "<name>Reach Neo</name>"
+    },
+    {
       "file": "packaging/windows/pdfcraft.wxs",
       "find": "https://getartcraft.com/apps/pdfcraft",
       "replace": "https://github.com/reachneoagent-commits/pdfflow"
