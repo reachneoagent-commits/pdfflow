@@ -92,8 +92,8 @@ pdfcraft-cli run    --script steps.json [--root DIR] [--report]
 ",
     mcp_usage!(),
     "\
-pdfcraft-cli ui     --control FILE <method> [key=value …] [--out shot.png]
-                                                           drive a running app started with --control FILE
+pdfcraft-cli ui     --control PORT (--control-token-file FILE | --control-token TOKEN) <method> [key=value …] [--out shot.png]
+                                                           drive a running app started with --control PORT
 help and feedback: https://github.com/reachneoagent-commits/pdfflow/issues"
 );
 
@@ -197,7 +197,6 @@ fn stdout_line(line: std::fmt::Arguments<'_>) -> Result<(), CliError> {
 
 fn version() -> Result<(), CliError> {
     stdout_line(format_args!("pdfcraft-cli {}", pdfcraft_engine::build_info::version()))?;
-    stdout_line(format_args!("Web:     {}", pdfcraft_engine::links::APP_PAGE))?;
     stdout_line(format_args!("Source:  {}", pdfcraft_engine::links::GITHUB))?;
     Ok(())
 }
