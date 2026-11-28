@@ -12,13 +12,13 @@
     },
     {
       "file": "apps/pdfcraft/src/main.rs",
-      "find": "let legacy = eframe::storage_dir(\"PdfCraft\")",
-      "replace": "let legacy = eframe::storage_dir(\"PDFflow\")"
+      "find": "} else { eframe::storage_dir(\"PdfCraft\") };",
+      "replace": "} else { eframe::storage_dir(\"PDFflow\") };"
     },
     {
-      "file": "apps/pdfcraft/src/main.rs",
-      "find": ".or_else(|| eframe::storage_dir(\"PdfCraft\"))",
-      "replace": ".or_else(|| eframe::storage_dir(\"PDFflow\"))"
+      "file": "crates/ui-egui/src/app/settings.rs",
+      "find": "const FOLDER_NAME: &'static str = \"PdfCraft\";",
+      "replace": "const FOLDER_NAME: &'static str = \"PDFflow\";"
     },
     {
       "file": "apps/pdfcraft/src/main.rs",
