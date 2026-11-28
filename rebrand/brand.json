@@ -83,6 +83,18 @@
       "replace": "'Reach Neo' 'MSI manufacturer'"
     },
     {
+      "file": "packaging/windows/test-msi.ps1",
+      "find": "PdfCraft",
+      "replace": "PDFflow"
+    },
+    {
+      "file": "LICENSES.toml",
+      "regex": true,
+      "find": "(source = \"NOTICE\"\\ndestination = \"NOTICE\"\\nsha256 = \")[0-9a-f]{64}\"",
+      "replace": "\\g<1>2c23c2c16da8299e3111eeee40b5bd6aab32801a17f6062222a0311cb6237a82\"",
+      "done": "sha256 = \"2c23c2c16da8299e3111eeee40b5bd6aab32801a17f6062222a0311cb6237a82\""
+    },
+    {
       "file": "packaging/linux/nfpm.yaml",
       "find": "vendor: Learning Machines LLC",
       "replace": "vendor: Reach Neo"
