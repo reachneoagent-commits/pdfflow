@@ -42,6 +42,10 @@ pub const ALLOWED_LICENCES: &[&str] = &[
 /// (licences.md).
 pub const BRAND_LICENCE: &str = "LicenseRef-Storyteller-Trademark";
 
+/// PDFflow fork (rebrand/brand.json): the PDFflow and FlowApps name and mark, not open source (see NOTICE).
+pub const FLOWAPPS_LICENCE: &str = "LicenseRef-FlowApps-Trademark";
+pub const FLOWAPPS_PATHS: &[&str] = &["brand/", "rebrand/app-icon/", "assets/app-icon/", "assets/header-"];
+
 pub const ADOBE_DATA_ALLOWED: &[(&str, &str)] = &[("hayro-cmap", "assets/cmaps.brotli"), ("hayro-interpret", "src/font/generated/metrics.rs")];
 
 /// First-party files on that same closed list: generated tables of Adobe-authored non-visual
@@ -247,7 +251,8 @@ pub fn check(root: &Path, m: &Manifest, repo_files: &[String], lock: &BTreeSet<(
         if !seen.insert(a.path.clone()) {
             problems.push(format!("{}: listed twice", a.path));
         }
-        let brand = a.licence == BRAND_LICENCE && a.kind == "logo" && a.path.starts_with("docs/brand/");
+        let brand = (a.licence == BRAND_LICENCE && a.kind == "logo" && a.path.starts_with("docs/brand/"))
+            || (a.licence == FLOWAPPS_LICENCE && FLOWAPPS_PATHS.iter().any(|p| a.path.starts_with(p)));
         if !brand {
             licence_ok(&a.path, &a.licence, &mut problems);
         }
