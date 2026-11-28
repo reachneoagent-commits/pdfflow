@@ -37,6 +37,8 @@ jobs:
 
       - name: Create macOS DMG
         run: |
+          # The cargo target dir fills the runner disk; the binary is already in the app bundle.
+          rm -rf target
           mkdir -p dist
           hdiutil create -srcfolder PDFflow.app -ov -format UDZO "dist/pdfflow-${VERSION}-macos-arm64.dmg"
 
