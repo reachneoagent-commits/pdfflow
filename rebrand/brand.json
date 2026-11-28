@@ -12,13 +12,13 @@
     },
     {
       "file": "apps/pdfcraft/src/main.rs",
-      "find": "let legacy = eframe::storage_dir(\"PdfCraft\")",
-      "replace": "let legacy = eframe::storage_dir(\"PDFflow\")"
+      "find": "} else { eframe::storage_dir(\"PdfCraft\") };",
+      "replace": "} else { eframe::storage_dir(\"PDFflow\") };"
     },
     {
-      "file": "apps/pdfcraft/src/main.rs",
-      "find": ".or_else(|| eframe::storage_dir(\"PdfCraft\"))",
-      "replace": ".or_else(|| eframe::storage_dir(\"PDFflow\"))"
+      "file": "crates/ui-egui/src/app/settings.rs",
+      "find": "const FOLDER_NAME: &'static str = \"PdfCraft\";",
+      "replace": "const FOLDER_NAME: &'static str = \"PDFflow\";"
     },
     {
       "file": "apps/pdfcraft/src/main.rs",
@@ -78,6 +78,33 @@
       "replace": "Reach Neo"
     },
     {
+      "file": "packaging/windows/test-msi.ps1",
+      "find": "'Learning Machines LLC' 'MSI manufacturer'",
+      "replace": "'Reach Neo' 'MSI manufacturer'"
+    },
+    {
+      "file": "packaging/windows/test-msi.ps1",
+      "find": "PdfCraft",
+      "replace": "PDFflow"
+    },
+    {
+      "file": "LICENSES.toml",
+      "regex": true,
+      "find": "(source = \"NOTICE\"\\ndestination = \"NOTICE\"\\nsha256 = \")[0-9a-f]{64}\"",
+      "replace": "\\g<1>2c23c2c16da8299e3111eeee40b5bd6aab32801a17f6062222a0311cb6237a82\"",
+      "done": "sha256 = \"2c23c2c16da8299e3111eeee40b5bd6aab32801a17f6062222a0311cb6237a82\""
+    },
+    {
+      "file": "packaging/linux/nfpm.yaml",
+      "find": "vendor: Learning Machines LLC",
+      "replace": "vendor: Reach Neo"
+    },
+    {
+      "file": "packaging/linux/ai.storyteller.pdfcraft.metainfo.xml.in",
+      "find": "<name>Learning Machines LLC</name>",
+      "replace": "<name>Reach Neo</name>"
+    },
+    {
       "file": "packaging/windows/pdfcraft.wxs",
       "find": "https://getartcraft.com/apps/pdfcraft",
       "replace": "https://github.com/reachneoagent-commits/pdfflow"
@@ -96,6 +123,101 @@
       "file": "packaging/windows/pdfcraft.wxs",
       "find": "PdfCraft",
       "replace": "PDFflow"
+    },
+    {
+      "file": "packaging/windows/install-policy.json",
+      "find": "PdfCraft",
+      "replace": "PDFflow",
+      "why": "must match the names in the rebranded .wxs"
+    },
+    {
+      "file": "packaging/windows/check-install-policy.ps1",
+      "find": "$directories['CraftSuiteFolder'][1] -ne 'ArtCraft') { throw 'Expected the app under the ArtCraft suite folder.' }",
+      "replace": "$directories['CraftSuiteFolder'][1] -ne 'FlowApps') { throw 'Expected the app under the FlowApps suite folder.' }"
+    },
+    {
+      "file": "packaging/windows/check-install-policy.ps1",
+      "find": "ArtCraft\\$($policy.name)",
+      "replace": "FlowApps\\$($policy.name)",
+      "why": "PDFflow installs under the FlowApps suite folder"
+    },
+    {
+      "file": "packaging/windows/install-policy.wxi",
+      "find": "Key=\"Software\\PdfCraft\"",
+      "replace": "Key=\"Software\\PDFflow\"",
+      "why": "read back the folder our .wxs writes under Software\\PDFflow"
+    },
+    {
+      "file": "packaging/windows/install-policy.wxi",
+      "find": "\\ArtCraft\\PdfCraft\\",
+      "replace": "\\FlowApps\\PDFflow\\",
+      "why": "install into the FlowApps suite folder, as the .wxs and install-policy.json say"
+    },
+    {
+      "file": "packaging/windows/install-policy.wxi",
+      "find": "the ArtCraft folder",
+      "replace": "the FlowApps folder"
+    },
+    {
+      "file": ".github/workflows/windows-arm64.yml",
+      "find": "install-relative-path: Programs/ArtCraft/PdfCraft",
+      "replace": "install-relative-path: Programs/FlowApps/PDFflow"
+    },
+    {
+      "file": "ATTRIBUTION.toml",
+      "find": "[[asset]]\npath = \"assets/app-icon/pdfcraft-1024.png\"\ntitle = \"PdfCraft app icon, 1024 px on Apple's icon grid\"\nauthor = \"PdfCraft contributors (drawn by the project owner in ArtCraft)\"\nsource = \"Contributor-original (see assets/app-icon/README.md)\"\nlicence = \"MIT OR Apache-2.0\"\nlicence_file = \"assets/app-icon/LICENSE.txt\"\nkind = \"icon\"\nusage = \"Runtime window/Dock icon on macOS (apps/pdfcraft/src/main.rs)\"\nsha256 = \"68ac6730b8990d07503351d32eacea81e9ec171a7a6f09daf52d6555d8245c8a\"",
+      "replace": "[[asset]]\npath = \"assets/app-icon/pdfcraft-1024.png\"\ntitle = \"PDFflow app icon, 1024 px\"\nauthor = \"Reach Neo\"\nsource = \"FlowApps brand kit (PDFflow fork, rebrand/)\"\nlicence = \"LicenseRef-FlowApps-Trademark\"\nlicence_file = \"NOTICE\"\nkind = \"icon\"\nusage = \"Runtime window/Dock icon on macOS (apps/pdfcraft/src/main.rs)\"\nsha256 = \"340f5848490ce253d2903ee6a5fb79120a1040135e69595e7007e0ed3e2acf85\"",
+      "done": "path = \"assets/app-icon/pdfcraft-1024.png\"\ntitle = \"PDFflow app icon, 1024 px\""
+    },
+    {
+      "file": "ATTRIBUTION.toml",
+      "find": "[[asset]]\npath = \"assets/app-icon/pdfcraft.icns\"\ntitle = \"PdfCraft app icon (macOS .icns)\"\nauthor = \"PdfCraft contributors (drawn by the project owner in ArtCraft)\"\nsource = \"Contributor-original (see assets/app-icon/README.md)\"\nlicence = \"MIT OR Apache-2.0\"\nlicence_file = \"assets/app-icon/LICENSE.txt\"\nkind = \"icon\"\nusage = \"macOS app bundle icon\"\nsha256 = \"fca7e7a0e34cc5c5ecae5bca97ee896aac68c4a34b088bc3a0b3271484f23974\"",
+      "replace": "[[asset]]\npath = \"assets/app-icon/pdfcraft.icns\"\ntitle = \"PDFflow macOS app icon\"\nauthor = \"Reach Neo\"\nsource = \"FlowApps brand kit (PDFflow fork, rebrand/)\"\nlicence = \"LicenseRef-FlowApps-Trademark\"\nlicence_file = \"NOTICE\"\nkind = \"icon\"\nusage = \"macOS app bundle icon\"\nsha256 = \"6eb2384b402be9fc0d4c03eb325c401e8a2499240c3423ea7b69b4482fe63820\"",
+      "done": "path = \"assets/app-icon/pdfcraft.icns\"\ntitle = \"PDFflow macOS app icon\""
+    },
+    {
+      "file": "ATTRIBUTION.toml",
+      "find": "[[asset]]\npath = \"assets/app-icon/pdfcraft.ico\"\ntitle = \"PdfCraft app icon (Windows .ico, 16-256 px)\"\nauthor = \"PdfCraft contributors (drawn by the project owner in ArtCraft)\"\nsource = \"Contributor-original (see assets/app-icon/README.md)\"\nlicence = \"MIT OR Apache-2.0\"\nlicence_file = \"assets/app-icon/LICENSE.txt\"\nkind = \"icon\"\nusage = \"Embedded in pdfcraft.exe by apps/pdfcraft/build.rs (Explorer, taskbar, Start menu, Alt-Tab)\"\nsha256 = \"709271d66e07710a3f785ea21b0c85c5228eaf8bebe5058bc0f71f9ef20749eb\"",
+      "replace": "[[asset]]\npath = \"assets/app-icon/pdfcraft.ico\"\ntitle = \"PDFflow Windows app icon\"\nauthor = \"Reach Neo\"\nsource = \"FlowApps brand kit (PDFflow fork, rebrand/)\"\nlicence = \"LicenseRef-FlowApps-Trademark\"\nlicence_file = \"NOTICE\"\nkind = \"icon\"\nusage = \"Embedded in pdfcraft.exe by apps/pdfcraft/build.rs (Explorer, taskbar, Start menu, Alt-Tab)\"\nsha256 = \"d8520e8bd73640be2596d35cd63e7db923047f44f6488d4d2064362888e0b595\"",
+      "done": "path = \"assets/app-icon/pdfcraft.ico\"\ntitle = \"PDFflow Windows app icon\""
+    },
+    {
+      "file": "ATTRIBUTION.toml",
+      "find": "[[asset]]\npath = \"assets/app-icon/hicolor/256x256/apps/ai.storyteller.pdfcraft.png\"\ntitle = \"PdfCraft app icon, 256 px\"\nauthor = \"PdfCraft contributors (drawn by the project owner in ArtCraft)\"\nsource = \"Contributor-original (see assets/app-icon/README.md)\"\nlicence = \"MIT OR Apache-2.0\"\nlicence_file = \"assets/app-icon/LICENSE.txt\"\nkind = \"icon\"\nusage = \"Linux hicolor theme icon (packaging/linux/ai.storyteller.pdfcraft.desktop); runtime window icon on Windows and Linux (apps/pdfcraft/src/main.rs)\"\nsha256 = \"47094c09fb77eb35d465eee46445626a4d78c7ef50629cc7d04a602de3e144e9\"",
+      "replace": "[[asset]]\npath = \"assets/app-icon/hicolor/256x256/apps/ai.storyteller.pdfcraft.png\"\ntitle = \"PDFflow app icon, 256 px\"\nauthor = \"Reach Neo\"\nsource = \"FlowApps brand kit (PDFflow fork, rebrand/)\"\nlicence = \"LicenseRef-FlowApps-Trademark\"\nlicence_file = \"NOTICE\"\nkind = \"icon\"\nusage = \"Linux hicolor theme icon (packaging/linux/ai.storyteller.pdfcraft.desktop); runtime window icon on Windows and Linux (apps/pdfcraft/src/main.rs)\"\nsha256 = \"644ae10eafe4919b4ba51f84b81e8f463a90b85d92de1cc5de2d4a46f3bca291\"",
+      "done": "path = \"assets/app-icon/hicolor/256x256/apps/ai.storyteller.pdfcraft.png\"\ntitle = \"PDFflow app icon, 256 px\""
+    },
+    {
+      "file": "xtask/src/assets.rs",
+      "find": "let brand = a.licence == BRAND_LICENCE && a.kind == \"logo\" && a.path.starts_with(\"docs/brand/\");",
+      "replace": "let brand = (a.licence == BRAND_LICENCE && a.kind == \"logo\" && a.path.starts_with(\"docs/brand/\"))\n            || (a.licence == FLOWAPPS_LICENCE && FLOWAPPS_PATHS.iter().any(|p| a.path.starts_with(p)));",
+      "done": "a.licence == FLOWAPPS_LICENCE"
+    },
+    {
+      "file": "xtask/src/assets.rs",
+      "find": "pub const BRAND_LICENCE: &str = \"LicenseRef-Storyteller-Trademark\";\n\npub const ADOBE_DATA_ALLOWED",
+      "replace": "pub const BRAND_LICENCE: &str = \"LicenseRef-Storyteller-Trademark\";\n\n/// PDFflow fork (rebrand/brand.json): the PDFflow and FlowApps name and mark, not open source (see NOTICE).\npub const FLOWAPPS_LICENCE: &str = \"LicenseRef-FlowApps-Trademark\";\npub const FLOWAPPS_PATHS: &[&str] = &[\"brand/\", \"rebrand/app-icon/\", \"assets/app-icon/\", \"assets/header-\"];\n\npub const ADOBE_DATA_ALLOWED",
+      "done": "pub const FLOWAPPS_LICENCE"
+    },
+    {
+      "file": "apps/pdfcraft/tests/help.rs",
+      "find": "starts_with(\"pdfcraft \")",
+      "replace": "starts_with(\"pdfflow \")"
+    },
+    {
+      "file": "packaging/linux/ai.storyteller.pdfcraft.desktop",
+      "find": "StartupWMClass=ai.storyteller.pdfcraft",
+      "replace": "StartupWMClass=com.pdfflow.app"
+    },
+    {
+      "file": "xtask/src/gates.rs",
+      "find": "contains(\"<string>ai.storyteller.pdfcraft</string>\")",
+      "replace": "contains(\"<string>com.pdfflow.app</string>\")"
+    },
+    {
+      "file": "xtask/src/gates.rs",
+      "find": "const APP_ID: &str = \"ai.storyteller.pdfcraft\"\"#",
+      "replace": "const APP_ID: &str = \"com.pdfflow.app\"\"#"
     }
   ],
   "prepend": [
@@ -159,6 +281,146 @@
         ".idea/",
         "*.swp",
         "*.swo"
+      ]
+    },
+    {
+      "file": "ATTRIBUTION.toml",
+      "marker": "# PDFflow (rebrand/apply.py): the PDFflow and FlowApps name",
+      "lines": [
+        "",
+        "# PDFflow (rebrand/apply.py): the PDFflow and FlowApps name and mark, added by the fork.",
+        "",
+        "[[asset]]",
+        "path = \"assets/header-dark.png\"",
+        "title = \"PDFflow README header\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"image\"",
+        "usage = \"README.md header\"",
+        "sha256 = \"8c9049c30ece9f7903ef9fa35ef7761ebba1ea69d49dfc5274f7039d186c44f5\"",
+        "",
+        "[[asset]]",
+        "path = \"assets/header-light.png\"",
+        "title = \"PDFflow README header\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"image\"",
+        "usage = \"README.md header\"",
+        "sha256 = \"a8ab4c7538687c24cf810f6f12ae6a743f403cb85d288ba06ce0c2609ccd1b61\"",
+        "",
+        "[[asset]]",
+        "path = \"brand/brand-color.png\"",
+        "title = \"PDFflow / FlowApps brand kit\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"logo\"",
+        "usage = \"Brand source files\"",
+        "sha256 = \"68fae26317e9f6d1ca1eb7e6d51e61d6d9b22efca8ffc5752bb56675708c51c5\"",
+        "",
+        "[[asset]]",
+        "path = \"brand/logoblk.svg\"",
+        "title = \"PDFflow / FlowApps brand kit\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"logo\"",
+        "usage = \"Brand source files\"",
+        "sha256 = \"9c4789495da270506323d09c9d1fbd3c860b16462e344b5da7c69b0589764f87\"",
+        "",
+        "[[asset]]",
+        "path = \"brand/logocol1.svg\"",
+        "title = \"PDFflow / FlowApps brand kit\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"logo\"",
+        "usage = \"Brand source files\"",
+        "sha256 = \"8782bd39312ef69d3bf57e08c8b7ac02ac6e19a84f619185c4e95f406baadecb\"",
+        "",
+        "[[asset]]",
+        "path = \"brand/logocol2.svg\"",
+        "title = \"PDFflow / FlowApps brand kit\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"logo\"",
+        "usage = \"Brand source files\"",
+        "sha256 = \"5af84a2fef676a013c027696bd19de45e95acb8234b74ae00f40e34eec759cfd\"",
+        "",
+        "[[asset]]",
+        "path = \"brand/logowht.svg\"",
+        "title = \"PDFflow / FlowApps brand kit\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"logo\"",
+        "usage = \"Brand source files\"",
+        "sha256 = \"e9db0e526ffb1c4e37c150614c4c51898960cb6ed4d206b0bdfc0c342476da0b\"",
+        "",
+        "[[asset]]",
+        "path = \"brand/pdfflow-brand.ai\"",
+        "title = \"PDFflow / FlowApps brand kit\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"logo\"",
+        "usage = \"Brand source files\"",
+        "sha256 = \"5b60f9e390353e8ea74a7b03f806d88ee66bd1bf561a58a5117784523755face\"",
+        "",
+        "[[asset]]",
+        "path = \"rebrand/app-icon/hicolor/256x256/apps/ai.storyteller.pdfcraft.png\"",
+        "title = \"PDFflow app icon (source for assets/app-icon/)\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"icon\"",
+        "usage = \"rebrand/apply.py copies it over the upstream icon\"",
+        "sha256 = \"644ae10eafe4919b4ba51f84b81e8f463a90b85d92de1cc5de2d4a46f3bca291\"",
+        "",
+        "[[asset]]",
+        "path = \"rebrand/app-icon/pdfcraft-1024.png\"",
+        "title = \"PDFflow app icon (source for assets/app-icon/)\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"icon\"",
+        "usage = \"rebrand/apply.py copies it over the upstream icon\"",
+        "sha256 = \"340f5848490ce253d2903ee6a5fb79120a1040135e69595e7007e0ed3e2acf85\"",
+        "",
+        "[[asset]]",
+        "path = \"rebrand/app-icon/pdfcraft.icns\"",
+        "title = \"PDFflow app icon (source for assets/app-icon/)\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"icon\"",
+        "usage = \"rebrand/apply.py copies it over the upstream icon\"",
+        "sha256 = \"6eb2384b402be9fc0d4c03eb325c401e8a2499240c3423ea7b69b4482fe63820\"",
+        "",
+        "[[asset]]",
+        "path = \"rebrand/app-icon/pdfcraft.ico\"",
+        "title = \"PDFflow app icon (source for assets/app-icon/)\"",
+        "author = \"Reach Neo\"",
+        "source = \"FlowApps brand kit (PDFflow fork, rebrand/)\"",
+        "licence = \"LicenseRef-FlowApps-Trademark\"",
+        "licence_file = \"NOTICE\"",
+        "kind = \"icon\"",
+        "usage = \"rebrand/apply.py copies it over the upstream icon\"",
+        "sha256 = \"d8520e8bd73640be2596d35cd63e7db923047f44f6488d4d2064362888e0b595\""
       ]
     }
   ]

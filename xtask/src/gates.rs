@@ -121,12 +121,18 @@ pub fn ci(_: &[String]) -> anyhow::Result<()> {
         ("deny", Box::new(|| deny(&[]))),
         ("parity", Box::new(|| crate::parity::run(&[]))),
     ];
-    for (i, (name, f)) in steps.iter().enumerate() {
+    // Independent steps keep running after a failure, so one run reports every failing step.
+    let mut failed = Vec::new();
+    for (name, f) in &steps {
         eprintln!("\n=== ci: {name} ===");
         if let Err(e) = f() {
-            println!("\nCI: {} passed, FAILED at `{name}`: {e:#}", i);
-            bail!("ci failed at `{name}`");
+            println!("\nCI: `{name}` FAILED: {e:#}");
+            failed.push(*name);
         }
+    }
+    if !failed.is_empty() {
+        println!("\nCI: {} of {} steps passed, FAILED: {}", steps.len() - failed.len(), steps.len(), failed.join(", "));
+        bail!("ci failed at {}", failed.iter().map(|n| format!("`{n}`")).collect::<Vec<_>>().join(", "));
     }
     println!("\nCI: all {} steps passed", steps.len());
     Ok(())
@@ -653,9 +659,9 @@ mod tests {
     // The bundle id must match the app id the binary uses; renames change both (#174).
     #[test]
     fn macos_bundle_id_matches_app_id() {
-        assert!(read("packaging/macos/Info.plist.in").contains("<string>ai.storyteller.pdfcraft</string>"), "bundle id");
+        assert!(read("packaging/macos/Info.plist.in").contains("<string>com.pdfflow.app</string>"), "bundle id");
         let main = read("apps/pdfcraft/src/main.rs");
-        assert!(main.contains(r#"const APP_ID: &str = "ai.storyteller.pdfcraft""#), "APP_ID drifted from the bundle id");
+        assert!(main.contains(r#"const APP_ID: &str = "com.pdfflow.app""#), "APP_ID drifted from the bundle id");
     }
 
     // Committed file with `<!-- -->` comments stripped, so a commented-out claim cannot pass.

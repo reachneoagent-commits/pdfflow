@@ -120,12 +120,20 @@ def rustfmt() -> None:
     subprocess.run(["cargo", "fmt", "--all"], cwd=ROOT, check=False)
 
 
+def attribution_md() -> None:
+    # ATTRIBUTION.md is rendered from ATTRIBUTION.toml; regenerate it when our edits touched the toml.
+    if CHECK or "ATTRIBUTION.toml" not in changed or not shutil.which("cargo"):
+        return
+    subprocess.run(["cargo", "xtask", "assets", "--write"], cwd=ROOT, check=False)
+
+
 def main() -> int:
     patches()
     edits()
     additions()
     icons()
     rustfmt()
+    attribution_md()
 
     for p in problems:
         print(f"error: {p}", file=sys.stderr)
